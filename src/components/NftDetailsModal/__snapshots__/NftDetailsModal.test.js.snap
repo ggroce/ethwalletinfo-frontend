@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NftDetailsModal />: takes a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="nftdetails__background--darken"
+  >
+    <div
+      class="nftdetails__wrapper--center"
+    >
+      <div
+        class="nftdetails__outerwrapper"
+      >
+        <div
+          class="nftdetails__innerwrapper"
+        >
+          <h5 />
+          <img
+            class="nftdetails__img"
+            loading="lazy"
+            title="Picture of NFT"
+          />
+          <h6>
+            From contract: 
+          </h6>
+          <h6>
+            Description: 
+          </h6>
+          <h6>
+            Minted at: 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

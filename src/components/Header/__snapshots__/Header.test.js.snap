@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header />: takes a snapshot 1`] = `
+<DocumentFragment>
+  <header>
+    <div>
+      <button
+        class="header__wallet-button"
+      >
+        Connect to Wallet
+      </button>
+      <br />
+      OR
+      <form>
+        <label>
+          Lookup Ethererum Address: 
+        </label>
+        <input
+          aria-label="address-input"
+          maxlength="42"
+          type="text"
+        />
+        <button
+          class="header__go-button"
+        >
+          Lookup
+        </button>
+      </form>
+    </div>
+  </header>
+</DocumentFragment>
+`;

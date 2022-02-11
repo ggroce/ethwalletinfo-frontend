@@ -1,0 +1,48 @@
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(1em + 0.1vw);
+}
+
+.header__wallet-button {
+  height: 35px;
+  border: 1px solid;
+  border-radius: 6px;
+  border-color: rgb(117, 110, 110);
+  width: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #191b20;
+  color: rgb(218, 216, 216);
+}
+
+.header__wallet-button:hover {
+  color: white;
+  background-color: #3a404b;
+}
+
+.header__go-button {
+  height: 30px;
+  border: 1px solid;
+  border-radius: 6px;
+  border-color: rgb(117, 110, 110);
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #191b20;
+  color: rgb(218, 216, 216);
+  margin-left: 10px;
+}
+
+.header__go-button:hover {
+  color: white;
+  background-color: #3a404b;
+}

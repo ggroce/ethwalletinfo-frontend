@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NftCard />: takes a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="nftcard__wrapper"
+  >
+    <div
+      class="nftcard__info-wrapper"
+    >
+      <h5 />
+    </div>
+    <img
+      class="nftcard__img"
+      loading="lazy"
+      title="Picture of NFT"
+    />
+  </div>
+</DocumentFragment>
+`;
