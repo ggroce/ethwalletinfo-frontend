@@ -26,11 +26,11 @@ test('<Header />: address input box should update in on input correctly from han
   expect(screen.getByLabelText('address-input')).toHaveValue('0x123');
 });
 
-test('<Header />: should display correct gas used value, (0.02 Eth), from supplied redux state', () => {
-  const walletStoreWithGasUsed = editWalletStore({ totalGasUsed: 200000 });
+test('<Header />: should display correct gas used value, (0.01234500 Eth), from supplied redux state', () => {
+  const walletStoreWithGasUsed = editWalletStore({ totalGasUsed: 0.012345 });
   renderWithRedux(<Header />, { initialState: walletStoreWithGasUsed });
 
   expect(screen.getByRole('heading')).toHaveTextContent(
-    'Total gas spent on transactions: 0.02 Eth'
+    'Total gas spent on transactions: 0.01234500 Eth'
   );
 });
