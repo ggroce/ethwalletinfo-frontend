@@ -5,6 +5,7 @@ import {
   RARIBLE_ENDPOINT,
   MAX_NFTS,
 } from '../../constants';
+import { ETHERSCAN_API_KEY } from '../../etherscan-apikey';
 
 export let axiosController = null;
 
@@ -27,7 +28,7 @@ export const getEthTransactions = async (address) => {
   axiosController = new AbortController();
   return await axios
     .get(
-      `${ETHERSCAN_ENDPOINT}?module=account&action=txlist&address=${address}&apikey=${process.env.ETHERSCAN_API_KEY}`,
+      `${ETHERSCAN_ENDPOINT}?module=account&action=txlist&address=${address}&apikey=${ETHERSCAN_API_KEY}`,
       { signal: axiosController.signal }
     )
     .then((resp) => {
