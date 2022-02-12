@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { ethers } from 'ethers';
 import {
-  ETHERSCAN_API_KEY,
   ETHERSCAN_ENDPOINT,
+  RARIBLE_ENDPOINT,
   MAX_NFTS,
 } from '../../constants';
 
@@ -22,23 +22,16 @@ export const validateAddress = (address) => {
   }
 };
 
-// calculates total amount of gas used by all 'from' transactions for address using Etherscan API
-export const getTotalGasUsed = async (address) => {
+// gets all Ethereum transactions for supplied Ethereum address from etherscan
+export const getEthTransactions = async (address) => {
   axiosController = new AbortController();
   return await axios
     .get(
-      `${ETHERSCAN_ENDPOINT}?module=account&action=txlist&address=${address}&apikey=${ETHERSCAN_API_KEY}`,
+      `${ETHERSCAN_ENDPOINT}?module=account&action=txlist&address=${address}&apikey=${process.env.ETHERSCAN_API_KEY}`,
       { signal: axiosController.signal }
     )
     .then((resp) => {
-      const totalGasUsed = resp.data.result.reduce((acc, transaction) => {
-        if (transaction.from.toLowerCase() === address.toLowerCase()) {
-          return acc + parseInt(transaction.gasUsed, 10);
-        } else {
-          return acc;
-        }
-      }, 0);
-      return totalGasUsed;
+      return calcTotalGasUsed(resp, address);
     })
     .catch((error) => {
       return new Error(
@@ -48,11 +41,28 @@ export const getTotalGasUsed = async (address) => {
     });
 };
 
+// calculates total amount of gas used by all 'from' transactions for address using Etherscan API
+const calcTotalGasUsed = (transactions, address) => {
+  const totalGasUsed = transactions.data.result.reduce((acc, transaction) => {
+    if (transaction.from.toLowerCase() === address.toLowerCase()) {
+      const total = transaction.gasPrice * transaction.gasUsed;
+      return acc + total;
+    } else {
+      return acc;
+    }
+  }, 0);
+  const totalGasUsedInEth = ethers.utils.formatEther(
+    totalGasUsed.toString(),
+    'wei'
+  );
+  return totalGasUsedInEth;
+};
+
 // queries Rarible API for NFTs owned by address
 export const getNfts = async (address) => {
   axiosController = new AbortController();
   return await axios
-    .get('https://api.rarible.com/protocol/v0.1/ethereum/nft/items/byOwner', {
+    .get(RARIBLE_ENDPOINT, {
       signal: axiosController.signal,
       params: { owner: address, continuation: MAX_NFTS },
     })

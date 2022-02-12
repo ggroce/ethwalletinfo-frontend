@@ -13,7 +13,7 @@ import {
 } from './wallet.actions';
 import {
   validateAddress,
-  getTotalGasUsed,
+  getEthTransactions,
   getNfts,
   axiosController,
 } from './wallet.utils';
@@ -49,7 +49,7 @@ export function* handleSetAddressSuccess({ payload }) {
 
 export function* handleGetTotalGasUsedStart({ payload }) {
   try {
-    const totalGasUsedResp = yield getTotalGasUsed(payload);
+    const totalGasUsedResp = yield getEthTransactions(payload);
     if (totalGasUsedResp instanceof Error) {
       throw totalGasUsedResp;
     }

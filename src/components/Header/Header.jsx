@@ -76,7 +76,10 @@ const Header = () => {
         </form>
       </div>
       {totalGasUsed !== null && (
-        <h6>Total gas spent on transactions: {totalGasUsed / 10000000} Eth</h6>
+        <h6>
+          Total gas spent on transactions: {parseFloat(totalGasUsed).toFixed(8)}{' '}
+          Eth
+        </h6>
       )}
     </header>
   );
