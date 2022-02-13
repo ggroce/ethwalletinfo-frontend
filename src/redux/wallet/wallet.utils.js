@@ -32,18 +32,19 @@ export const getEthTransactions = async (address) => {
       { signal: axiosController.signal }
     )
     .then((resp) => {
-      return calcTotalGasUsed(resp, address);
+      if (resp.data.status === '0') {
+        throw new Error(resp.data.result);
+      }
+      return resp;
     })
     .catch((error) => {
-      return new Error(
-        'Error calculating or retrieving total gas used: ',
-        error
-      );
+      console.log('Error from wallet.utils.getEthTransactions: ', error);
+      return new Error('Error retrieving transactions: ', error);
     });
 };
 
 // calculates total amount of gas used by all 'from' transactions for address using Etherscan API
-const calcTotalGasUsed = (transactions, address) => {
+export const calcTotalGasUsed = (transactions, address) => {
   const totalGasUsed = transactions.data.result.reduce((acc, transaction) => {
     if (transaction.from.toLowerCase() === address.toLowerCase()) {
       const total = transaction.gasPrice * transaction.gasUsed;

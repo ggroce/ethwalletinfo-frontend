@@ -1,9 +1,11 @@
 import { runSaga } from 'redux-saga';
+import { call, put } from '@redux-saga/core/effects';
 import * as actions from './wallet.actions';
 import {
   handleSetAddressStart,
   handleGetTotalGasUsedStart,
 } from './wallet.sagas';
+import { getEthTransactions } from './wallet.utils';
 
 test('wallet.sagas: handleSetAddressStart success', async () => {
   const dispatched = [];
@@ -49,8 +51,25 @@ test('wallet.sagas: handleGetTotalGasUsedStart failure', async () => {
   ).toPromise();
 
   expect(dispatched).toEqual([
-    actions.getTotalGasUsedFailure(
-      'Error calculating or retrieving total gas used: '
-    ),
+    actions.getTotalGasUsedFailure('Error retrieving transactions: '),
   ]);
 });
+
+// test('wallet.sagas: handleGetTotalGasUsedStart success', async () => {
+//   const mockTransactions = {
+//     data: {
+//       result: [
+//         {
+//           from: '0x3cd751e6b0078be393132286c442345e5dc49699',
+//           gasPrice: '61154253728',
+//           gasUsed: '21000',
+//         },
+//         {
+//           from: '0x3cd751e6b0078be393132286c442345e5dc49699',
+//           gasPrice: '200000000000',
+//           gasUsed: '817570',
+//         },
+//       ],
+//     },
+//   };
+// });

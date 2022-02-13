@@ -14,6 +14,7 @@ import {
 import {
   validateAddress,
   getEthTransactions,
+  calcTotalGasUsed,
   getNfts,
   axiosController,
 } from './wallet.utils';
@@ -49,11 +50,15 @@ export function* handleSetAddressSuccess({ payload }) {
 
 export function* handleGetTotalGasUsedStart({ payload }) {
   try {
-    const totalGasUsedResp = yield call(getEthTransactions, payload);
-    if (totalGasUsedResp instanceof Error) {
-      throw totalGasUsedResp;
+    const ethTransactions = yield call(getEthTransactions, payload);
+
+    if (ethTransactions instanceof Error) {
+      throw ethTransactions;
     }
-    yield put(getTotalGasUsedSuccess(totalGasUsedResp));
+    const address = yield select(getAddress);
+    const totalGasUsed = yield call(calcTotalGasUsed, ethTransactions, address);
+
+    yield put(getTotalGasUsedSuccess(totalGasUsed));
   } catch (error) {
     console.log(error);
     yield put(getTotalGasUsedFailure(error.message));
