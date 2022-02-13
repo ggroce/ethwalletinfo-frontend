@@ -30,7 +30,7 @@ export function* handleResetWallet() {
 
 export function* handleSetAddressStart({ payload }) {
   try {
-    const address = validateAddress(payload);
+    const address = yield call(validateAddress, payload);
     if (address) {
       yield put(setAddressSuccess(address));
     }
@@ -49,7 +49,7 @@ export function* handleSetAddressSuccess({ payload }) {
 
 export function* handleGetTotalGasUsedStart({ payload }) {
   try {
-    const totalGasUsedResp = yield getEthTransactions(payload);
+    const totalGasUsedResp = yield call(getEthTransactions, payload);
     if (totalGasUsedResp instanceof Error) {
       throw totalGasUsedResp;
     }
@@ -71,7 +71,7 @@ export function* handleGetTotalGasUsedSuccess() {
 export function* handleGetNftsStart() {
   try {
     const address = yield select(getAddress);
-    const nftRequestResp = yield getNfts(address);
+    const nftRequestResp = yield call(getNfts, address);
     if (nftRequestResp instanceof Error) {
       throw nftRequestResp;
     }
