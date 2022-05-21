@@ -1,5 +1,5 @@
 ## Eth Wallet Info: view total gas spent by wallet and view NFTs
-Simple web application that allows the user to view the total gas used by a wallet, and view the NFTs owned by a wallet and their details via modal popup.  Allows for Metamask connection, or entering any wallet address via a text form.  
+Simple web application that allows the user to view the total gas used by a wallet, (à la fees.wtf), and view the NFTs owned by a wallet and their details via modal popup.  Allows for Metamask connection, or entering any wallet address via a text form.  
 
 ### Packages used: 
 * ReactJS, using functional components and hooks
