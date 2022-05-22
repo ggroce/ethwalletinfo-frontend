@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import {
   ETHERSCAN_ENDPOINT,
   RARIBLE_ENDPOINT,
+  RARIBLE_BLOCKCHAIN,
   MAX_NFTS,
 } from '../../constants';
 import { ETHERSCAN_API_KEY } from '../../etherscan-apikey';
@@ -60,13 +61,17 @@ export const calcTotalGasUsed = (transactions, address) => {
   return totalGasUsedInEth;
 };
 
+
+// , size: MAX_NFTS, blockchains: [RARIBLE_BLOCKCHAIN]
+
+
 // queries Rarible API for NFTs owned by address
 export const getNfts = async (address) => {
   axiosController = new AbortController();
   return await axios
     .get(RARIBLE_ENDPOINT, {
       signal: axiosController.signal,
-      params: { owner: address, continuation: MAX_NFTS },
+      params: { owner: `${RARIBLE_BLOCKCHAIN}:${address}`, blockchains: RARIBLE_BLOCKCHAIN, size: MAX_NFTS },
     })
     .then((resp) => {
       return resp.data.items;

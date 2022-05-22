@@ -1,4 +1,4 @@
 export const ETHERSCAN_ENDPOINT = 'https://api.etherscan.io/api';
-export const RARIBLE_ENDPOINT =
-  'https://api.rarible.com/protocol/v0.1/ethereum/nft/items/byOwner';
-export const MAX_NFTS = 100;
+export const RARIBLE_ENDPOINT = 'https://api.rarible.org/v0.1/items/byOwner';
+export const RARIBLE_BLOCKCHAIN = 'ETHEREUM';
+export const MAX_NFTS = 20;

@@ -5,6 +5,12 @@ import { useState } from 'react';
 const NftCard = (props) => {
   const [showDetails, setShowDetails] = useState(false);
 
+  const imageUrls = props.meta.content.reduce((prev, curr, index) => {
+    return { ...prev, 
+      [curr.representation]: curr.url,
+    }
+  }, {});
+
   return (
     <>
       <div className="nftcard__wrapper" onClick={() => setShowDetails(true)}>
@@ -13,7 +19,7 @@ const NftCard = (props) => {
         </div>
         <img
           className="nftcard__img"
-          src={props.meta?.image.url.PREVIEW || props.meta?.image.url.ORIGINAL}
+          src={imageUrls.PREVIEW || imageUrls.ORIGINAL}
           loading="lazy"
           title="Picture of NFT"
           alt={props.meta?.name}

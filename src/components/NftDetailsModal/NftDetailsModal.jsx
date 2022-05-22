@@ -1,6 +1,12 @@
 import './NftDetailsModal.css';
 
 const NftDetailsModal = ({ setShowDetails, props }) => {
+    const imageUrls = props.meta.content.reduce((prev, curr, index) => {
+    return { ...prev, 
+      [curr.representation]: curr.url,
+    }
+  }, {});
+
   return (
     <>
       <div
@@ -13,7 +19,7 @@ const NftDetailsModal = ({ setShowDetails, props }) => {
               <h5>{props?.meta.name}</h5>
               <img
                 className="nftdetails__img"
-                src={props?.meta.image.url.ORIGINAL}
+                src={imageUrls.ORIGINAL}
                 loading="lazy"
                 title="Picture of NFT"
                 alt={props?.meta.name}
